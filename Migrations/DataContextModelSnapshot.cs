@@ -16,6 +16,56 @@ namespace dotnet_store.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.2");
 
+            modelBuilder.Entity("dotnet_store.Models.Kategori", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("KategoriAdi")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Kategoriler");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            KategoriAdi = "Telefon",
+                            Url = "telefon"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            KategoriAdi = "Elektronik",
+                            Url = "elektronik"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            KategoriAdi = "Beyaz Eşya",
+                            Url = "beyaz-esya"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            KategoriAdi = "Giyim",
+                            Url = "giyim"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            KategoriAdi = "Kozmetik",
+                            Url = "kozmetik"
+                        });
+                });
+
             modelBuilder.Entity("dotnet_store.Models.Urun", b =>
                 {
                     b.Property<int>("Id")
@@ -34,6 +84,9 @@ namespace dotnet_store.Migrations
                     b.Property<double>("Fiyat")
                         .HasColumnType("REAL");
 
+                    b.Property<int>("KategoriId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Resim")
                         .HasColumnType("TEXT");
 
@@ -42,6 +95,8 @@ namespace dotnet_store.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("KategoriId");
 
                     b.ToTable("Urunler");
 
@@ -53,6 +108,7 @@ namespace dotnet_store.Migrations
                             Aktif = false,
                             Anasayfa = true,
                             Fiyat = 10000.0,
+                            KategoriId = 1,
                             Resim = "1.jpeg",
                             UrunAdi = "Apple Watch 7"
                         },
@@ -63,6 +119,7 @@ namespace dotnet_store.Migrations
                             Aktif = true,
                             Anasayfa = true,
                             Fiyat = 20000.0,
+                            KategoriId = 2,
                             Resim = "2.jpeg",
                             UrunAdi = "Apple Watch 8"
                         },
@@ -73,6 +130,7 @@ namespace dotnet_store.Migrations
                             Aktif = true,
                             Anasayfa = false,
                             Fiyat = 30000.0,
+                            KategoriId = 3,
                             Resim = "3.jpeg",
                             UrunAdi = "Apple Watch 9"
                         },
@@ -83,6 +141,7 @@ namespace dotnet_store.Migrations
                             Aktif = false,
                             Anasayfa = true,
                             Fiyat = 40000.0,
+                            KategoriId = 4,
                             Resim = "4.jpeg",
                             UrunAdi = "Apple Watch 10"
                         },
@@ -91,8 +150,9 @@ namespace dotnet_store.Migrations
                             Id = 5,
                             Aciklama = "Lorem ipsum dolor sit amet.",
                             Aktif = true,
-                            Anasayfa = false,
+                            Anasayfa = true,
                             Fiyat = 50000.0,
+                            KategoriId = 5,
                             Resim = "5.jpeg",
                             UrunAdi = "Apple Watch 11"
                         },
@@ -101,11 +161,28 @@ namespace dotnet_store.Migrations
                             Id = 6,
                             Aciklama = "Lorem ipsum dolor sit amet.",
                             Aktif = true,
-                            Anasayfa = false,
+                            Anasayfa = true,
                             Fiyat = 60000.0,
+                            KategoriId = 1,
                             Resim = "6.jpeg",
                             UrunAdi = "Apple Watch 12"
                         });
+                });
+
+            modelBuilder.Entity("dotnet_store.Models.Urun", b =>
+                {
+                    b.HasOne("dotnet_store.Models.Kategori", "Kategori")
+                        .WithMany("Uruns")
+                        .HasForeignKey("KategoriId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Kategori");
+                });
+
+            modelBuilder.Entity("dotnet_store.Models.Kategori", b =>
+                {
+                    b.Navigation("Uruns");
                 });
 #pragma warning restore 612, 618
         }
