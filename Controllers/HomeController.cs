@@ -15,7 +15,7 @@ public class HomeController : Controller
 
     public ActionResult Index()
     {
-        var urunler = _context.Urunler.ToList();
+        var urunler = _context.Urunler.Where(urun=>urun.Aktif && urun.Anasayfa).ToList();
         return View(urunler);
     }
 }

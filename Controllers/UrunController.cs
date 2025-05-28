@@ -19,7 +19,14 @@ public class UrunController : Controller
 
     public ActionResult List()
     {
-        var urunler = _context.Urunler.ToList();
+        var urunler = _context.Urunler.Where(urun => urun.Aktif).ToList();
         return View(urunler);
+    }
+    
+    public ActionResult Details(int id)
+    {
+        // var urun = _context.Urunler.FirstOrDefault(urun => urun.Id == id);
+        var urun = _context.Urunler.Find(id);
+        return View(urun);
     }
 }
