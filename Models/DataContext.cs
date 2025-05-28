@@ -10,10 +10,20 @@ public class DataContext : DbContext
     }
     public DbSet<Urun> Urunler { get; set; }
     public DbSet<Kategori> Kategoriler { get; set; }
+    public DbSet<Slider> Sliderlar { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Slider>().HasData(
+            new List<Slider>
+            {
+                new Slider{Id=1, Resim="slider-1.jpeg" },
+                new Slider{Id=2, Resim="slider-2.jpeg" },
+                new Slider{Id=3, Resim="slider-3.jpeg" },
+            }
+        );
 
         modelBuilder.Entity<Kategori>().HasData(
             new List<Kategori>
@@ -23,6 +33,12 @@ public class DataContext : DbContext
                 new Kategori{Id=3, KategoriAdi="Beyaz Eşya", Url="beyaz-esya"},
                 new Kategori{Id=4, KategoriAdi="Giyim", Url="giyim"},
                 new Kategori{Id=5, KategoriAdi="Kozmetik", Url="kozmetik"},
+                new Kategori{Id=6, KategoriAdi="Kategori 1", Url="kategori-1"},
+                new Kategori{Id=7, KategoriAdi="Kategori 2", Url="kategori-2"},
+                new Kategori{Id=8, KategoriAdi="Kategori 3", Url="kategori-3"},
+                new Kategori{Id=9, KategoriAdi="Kategori 4", Url="kategori-4"},
+                new Kategori{Id=10, KategoriAdi="Kategori 5", Url="kategori-5"},
+
             }
         );
 
