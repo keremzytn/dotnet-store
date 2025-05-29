@@ -17,16 +17,26 @@ public class UrunController : Controller
         return View();
     }
 
-    public ActionResult List()
+    public ActionResult List(string url)
     {
-        var urunler = _context.Urunler.Where(urun => urun.Aktif).ToList();
+        var urunler = _context.Urunler.Where(urun => urun.Aktif && urun.Kategori.Url == url).ToList();
         return View(urunler);
     }
-    
+
     public ActionResult Details(int id)
     {
         // var urun = _context.Urunler.FirstOrDefault(urun => urun.Id == id);
         var urun = _context.Urunler.Find(id);
+
+        if (urun == null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        ViewData["BenzerUrunler"] = _context.Urunler
+        .Where(i => i.Aktif && i.KategoriId == urun.KategoriId && i.Id != id)
+        .Take(4)
+        .ToList();
         return View(urun);
     }
 }
