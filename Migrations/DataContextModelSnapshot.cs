@@ -27,6 +27,7 @@ namespace dotnet_store.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Url")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -102,7 +103,20 @@ namespace dotnet_store.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Aciklama")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Aktif")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Baslik")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Index")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Resim")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -113,16 +127,28 @@ namespace dotnet_store.Migrations
                         new
                         {
                             Id = 1,
+                            Aciklama = "Slider 1 Açıklama",
+                            Aktif = true,
+                            Baslik = "Slider 1 Başlık",
+                            Index = 0,
                             Resim = "slider-1.jpeg"
                         },
                         new
                         {
                             Id = 2,
+                            Aciklama = "Slider 2 Açıklama",
+                            Aktif = true,
+                            Baslik = "Slider 2 Başlık",
+                            Index = 1,
                             Resim = "slider-2.jpeg"
                         },
                         new
                         {
                             Id = 3,
+                            Aciklama = "Slider 3 Açıklama",
+                            Aktif = true,
+                            Baslik = "Slider 3 Başlık",
+                            Index = 2,
                             Resim = "slider-3.jpeg"
                         });
                 });
@@ -165,7 +191,7 @@ namespace dotnet_store.Migrations
                         new
                         {
                             Id = 1,
-                            Aciklama = "Lorem ipsum dolor sit amet.",
+                            Aciklama = "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis quam accusamus neque tempore, consequatur dolor, nihil impedit recusandae ad adipisci eveniet libero ipsum quidem optio laboriosam, ea ipsa ducimus iusto?",
                             Aktif = false,
                             Anasayfa = true,
                             Fiyat = 10000.0,
@@ -176,57 +202,79 @@ namespace dotnet_store.Migrations
                         new
                         {
                             Id = 2,
-                            Aciklama = "Lorem ipsum dolor sit amet.",
+                            Aciklama = "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis quam accusamus neque tempore, consequatur dolor, nihil impedit recusandae ad adipisci eveniet libero ipsum quidem optio laboriosam, ea ipsa ducimus iusto?",
                             Aktif = true,
                             Anasayfa = true,
                             Fiyat = 20000.0,
-                            KategoriId = 2,
+                            KategoriId = 1,
                             Resim = "2.jpeg",
                             UrunAdi = "Apple Watch 8"
                         },
                         new
                         {
                             Id = 3,
-                            Aciklama = "Lorem ipsum dolor sit amet.",
+                            Aciklama = "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis quam accusamus neque tempore, consequatur dolor, nihil impedit recusandae ad adipisci eveniet libero ipsum quidem optio laboriosam, ea ipsa ducimus iusto?",
                             Aktif = true,
-                            Anasayfa = false,
+                            Anasayfa = true,
                             Fiyat = 30000.0,
-                            KategoriId = 3,
+                            KategoriId = 2,
                             Resim = "3.jpeg",
                             UrunAdi = "Apple Watch 9"
                         },
                         new
                         {
                             Id = 4,
-                            Aciklama = "Lorem ipsum dolor sit amet.",
+                            Aciklama = "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis quam accusamus neque tempore, consequatur dolor, nihil impedit recusandae ad adipisci eveniet libero ipsum quidem optio laboriosam, ea ipsa ducimus iusto?",
                             Aktif = false,
-                            Anasayfa = true,
+                            Anasayfa = false,
                             Fiyat = 40000.0,
-                            KategoriId = 4,
+                            KategoriId = 2,
                             Resim = "4.jpeg",
                             UrunAdi = "Apple Watch 10"
                         },
                         new
                         {
                             Id = 5,
-                            Aciklama = "Lorem ipsum dolor sit amet.",
+                            Aciklama = "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis quam accusamus neque tempore, consequatur dolor, nihil impedit recusandae ad adipisci eveniet libero ipsum quidem optio laboriosam, ea ipsa ducimus iusto?",
                             Aktif = true,
                             Anasayfa = true,
                             Fiyat = 50000.0,
-                            KategoriId = 5,
+                            KategoriId = 2,
                             Resim = "5.jpeg",
                             UrunAdi = "Apple Watch 11"
                         },
                         new
                         {
                             Id = 6,
-                            Aciklama = "Lorem ipsum dolor sit amet.",
-                            Aktif = true,
-                            Anasayfa = true,
+                            Aciklama = "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis quam accusamus neque tempore, consequatur dolor, nihil impedit recusandae ad adipisci eveniet libero ipsum quidem optio laboriosam, ea ipsa ducimus iusto?",
+                            Aktif = false,
+                            Anasayfa = false,
                             Fiyat = 60000.0,
-                            KategoriId = 1,
+                            KategoriId = 3,
                             Resim = "6.jpeg",
                             UrunAdi = "Apple Watch 12"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Aciklama = "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis quam accusamus neque tempore, consequatur dolor, nihil impedit recusandae ad adipisci eveniet libero ipsum quidem optio laboriosam, ea ipsa ducimus iusto?",
+                            Aktif = false,
+                            Anasayfa = false,
+                            Fiyat = 70000.0,
+                            KategoriId = 3,
+                            Resim = "7.jpeg",
+                            UrunAdi = "Apple Watch 14"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Aciklama = "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis quam accusamus neque tempore, consequatur dolor, nihil impedit recusandae ad adipisci eveniet libero ipsum quidem optio laboriosam, ea ipsa ducimus iusto?",
+                            Aktif = true,
+                            Anasayfa = true,
+                            Fiyat = 80000.0,
+                            KategoriId = 4,
+                            Resim = "8.jpeg",
+                            UrunAdi = "Apple Watch 15"
                         });
                 });
 

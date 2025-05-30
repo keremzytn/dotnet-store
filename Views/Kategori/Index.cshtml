@@ -25,22 +25,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach(var item in Model){
-                            <tr>
-                                <td>@item.Id</td>
-                                <td>@item.KategoriAdi</td>
-                                <td>@item.Url</td>
-                                <td>@item.UrunSayisi</td>
-                                <td>
-                                    <a href="kategori-ekle.html" class="btn btn-primary btn-sm">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                    <a href="urun.html" class="btn btn-primary btn-sm">
-                                        <i class="fa-solid fa-right-long"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                            @foreach (var kat in Model)
+                            {
+                                <tr>
+                                    <td>@kat.Id</td>
+                                    <td>@kat.KategoriAdi</td>
+                                    <td>@kat.Url</td>
+                                    <td>@kat.UrunSayisi</td>
+                                    <td>
+                                        <a href="kategori-ekle.html" class="btn btn-primary btn-sm">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                        <a href="urun.html" class="btn btn-primary btn-sm">
+                                            <i class="fa-solid fa-right-long"></i>
+                                        </a>
+                                    </td>
+                                </tr>
                             }
+
                         </tbody>
                     </table>
                 </div>

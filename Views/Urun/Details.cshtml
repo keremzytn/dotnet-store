@@ -37,7 +37,7 @@
                         <span class="fa fa-star"></span>
                     </div>
                     <p class="text-success">Stokta</p>
-                    <div class="mb-3"><b class="price h5">@Model.Fiyat</b></div>
+                    <div class="mb-3"><b class="price h5">@Model.Fiyat ₺</b></div>
                     <div class="product-description mb-3">@Model.Aciklama</div>
                     <dl class="row border-bottom">
                         <dt class="col-3">Renk</dt>
@@ -68,8 +68,10 @@
     </div>
 </section>
 
+
 @{
     var urunler = (List<Urun>)ViewData["BenzerUrunler"]!;
+
     if (urunler.Count > 0)
     {
         <section class="mt-3">
@@ -87,7 +89,8 @@
                                 </div>
 
                                 <div class="border-top info-wrap">
-                                    <a asp-controller="Urun" asp-action="Details" asp-route-id="@item.Id" class="title text-truncate">@item.UrunAdi</a>
+                                    <a asp-controller="Urun" asp-action="Details" asp-route-id="@item.Id"
+                                        class="title text-truncate">@item.UrunAdi</a>
                                     <div class="price-wrap mb-3">
                                         <span class="price-discount">@item.Fiyat ₺</span>
                                         @* <del class="price">49.999 ₺</del> *@
@@ -99,6 +102,7 @@
                             </div>
                         </div>
                     }
+
                 </div>
             </div>
         </section>

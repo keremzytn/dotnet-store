@@ -1,11 +1,11 @@
 using dotnet_store.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace dotnet_store.Controllers;
 
 public class UrunController : Controller
 {
-    // Dependecy Injection => DI
     private readonly DataContext _context;
     public UrunController(DataContext context)
     {
@@ -14,12 +14,24 @@ public class UrunController : Controller
 
     public ActionResult Index()
     {
-        return View();
+        var urunler = _context.Urunler.Select(i => new UrunGetModel
+        {
+            Id = i.Id,
+            UrunAdi = i.UrunAdi,
+            Fiyat = i.Fiyat,
+            Aktif = i.Aktif,
+            Anasayfa = i.Anasayfa,
+            KategoriAdi = i.Kategori.KategoriAdi,
+            Resim = i.Resim
+        }).ToList();
+
+        return View(urunler);
     }
 
     public ActionResult List(string url, string q)
     {
-        var query = _context.Urunler.Where(i=>i.Aktif);
+        var query = _context.Urunler.Where(i => i.Aktif);
+
         if (!string.IsNullOrEmpty(url))
         {
             query = query.Where(i => i.Kategori.Url == url);
@@ -28,14 +40,15 @@ public class UrunController : Controller
         if (!string.IsNullOrEmpty(q))
         {
             query = query.Where(i => i.UrunAdi.ToLower().Contains(q.ToLower()));
+
             ViewData["q"] = q;
         }
+
         return View(query.ToList());
     }
 
     public ActionResult Details(int id)
     {
-        // var urun = _context.Urunler.FirstOrDefault(urun => urun.Id == id);
         var urun = _context.Urunler.Find(id);
 
         if (urun == null)
@@ -44,9 +57,35 @@ public class UrunController : Controller
         }
 
         ViewData["BenzerUrunler"] = _context.Urunler
-        .Where(i => i.Aktif && i.KategoriId == urun.KategoriId && i.Id != id)
-        .Take(4)
-        .ToList();
+                                        .Where(i => i.Aktif && i.KategoriId == urun.KategoriId && i.Id != id)
+                                        .Take(4)
+                                        .ToList();
+
         return View(urun);
+    }
+
+    public ActionResult Create()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public ActionResult Create(UrunCreateModel model)
+    {
+        var entity = new Urun()
+        {
+            UrunAdi = model.UrunAdi,
+            Aciklama = model.Aciklama,
+            Fiyat = model.Fiyat,
+            Aktif = model.Aktif,
+            Anasayfa = model.Anasayfa,
+            KategoriId = model.KategoriId,
+            Resim = "1.jpeg"    // upload
+        };
+
+        _context.Urunler.Add(entity);
+        _context.SaveChanges();
+
+        return RedirectToAction("Index");
     }
 }

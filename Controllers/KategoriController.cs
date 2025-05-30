@@ -11,19 +11,19 @@ public class KategoriController : Controller
     {
         _context = context;
     }
+
     public ActionResult Index()
     {
-        var kategoriler = _context.Kategoriler.Select(
-            i => new KategoriGetModel
-            {
-                Id = i.Id,
-                KategoriAdi = i.KategoriAdi,
-                Url = i.Url,
-                UrunSayisi = i.Uruns.Count
-            }).ToList();
+        var kategoriler = _context.Kategoriler.Select(i => new KategoriGetModel
+        {
+            Id = i.Id,
+            KategoriAdi = i.KategoriAdi,
+            Url = i.Url,
+            UrunSayisi = i.Uruns.Count
+        }).ToList();
         return View(kategoriler);
     }
-    
+
     [HttpGet]
     public ActionResult Create()
     {
@@ -31,12 +31,12 @@ public class KategoriController : Controller
     }
 
     [HttpPost]
-    public ActionResult Create(string kategoriAdi, string kategoriUrl)
+    public ActionResult Create(KategoriCreateModel model)
     {
         var entity = new Kategori
         {
-            KategoriAdi = kategoriAdi,
-            Url = kategoriUrl
+            KategoriAdi = model.KategoriAdi,
+            Url = model.Url
         };
 
         _context.Kategoriler.Add(entity);
@@ -44,4 +44,5 @@ public class KategoriController : Controller
 
         return RedirectToAction("Index");
     }
+
 }

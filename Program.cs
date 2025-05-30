@@ -29,6 +29,10 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 
+// urunler/telefon
+// urunler/elektronik
+// urunler/beyaz-esya
+
 app.MapControllerRoute(
     name: "urunler_by_kategori",
     pattern: "urunler/{url?}",
@@ -39,5 +43,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
+
 
 app.Run();

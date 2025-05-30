@@ -1,5 +1,4 @@
 namespace dotnet_store.Models;
-
 public class Urun
 {
     public int Id { get; set; }
@@ -10,5 +9,5 @@ public class Urun
     public bool Aktif { get; set; }
     public bool Anasayfa { get; set; }
     public int KategoriId { get; set; }
-    public Kategori Kategori { get; set; }
+    public Kategori Kategori { get; set; } = null!;
 }

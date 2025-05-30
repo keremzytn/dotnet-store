@@ -6,7 +6,6 @@ namespace dotnet_store.Controllers;
 
 public class HomeController : Controller
 {
-    // Dependecy Injection => DI
     private readonly DataContext _context;
     public HomeController(DataContext context)
     {
@@ -15,8 +14,9 @@ public class HomeController : Controller
 
     public ActionResult Index()
     {
-        var urunler = _context.Urunler.Where(urun=>urun.Aktif && urun.Anasayfa).ToList();
+        var urunler = _context.Urunler.Where(urun => urun.Aktif && urun.Anasayfa).ToList();
         ViewData["Kategoriler"] = _context.Kategoriler.ToList();
         return View(urunler);
     }
+
 }

@@ -138,6 +138,8 @@
 /Users/kerem/Projects/udemyEgitim/dotnet-store/obj/Debug/net9.0/dotnet-store.RazorAssemblyInfo.cs
 /Users/kerem/Projects/udemyEgitim/dotnet-store/obj/Debug/net9.0/dotnet-store.sourcelink.json
 /Users/kerem/Projects/udemyEgitim/dotnet-store/obj/Debug/net9.0/scopedcss/bundle/dotnet-store.styles.css
+/Users/kerem/Projects/udemyEgitim/dotnet-store/obj/Debug/net9.0/compressed/stxxyg6xyu-h9v4xoiqc9.gz
+/Users/kerem/Projects/udemyEgitim/dotnet-store/obj/Debug/net9.0/compressed/gejvkwke1r-iuupnodv0a.gz
 /Users/kerem/Projects/udemyEgitim/dotnet-store/obj/Debug/net9.0/compressed/ybqhv9wpbv-vwipl5cvsg.gz
 /Users/kerem/Projects/udemyEgitim/dotnet-store/obj/Debug/net9.0/compressed/48lvmql9bb-wqhl0zxvjx.gz
 /Users/kerem/Projects/udemyEgitim/dotnet-store/obj/Debug/net9.0/compressed/v6fbf8u7hm-l6j59c68gs.gz
@@ -213,5 +215,3 @@
 /Users/kerem/Projects/udemyEgitim/dotnet-store/obj/Debug/net9.0/dotnet-store.pdb
 /Users/kerem/Projects/udemyEgitim/dotnet-store/obj/Debug/net9.0/dotnet-store.genruntimeconfig.cache
 /Users/kerem/Projects/udemyEgitim/dotnet-store/obj/Debug/net9.0/ref/dotnet-store.dll
-/Users/kerem/Projects/udemyEgitim/dotnet-store/obj/Debug/net9.0/compressed/stxxyg6xyu-l79u8qdsdx.gz
-/Users/kerem/Projects/udemyEgitim/dotnet-store/obj/Debug/net9.0/compressed/gejvkwke1r-tpznpjr8xw.gz
