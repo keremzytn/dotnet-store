@@ -27,7 +27,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapStaticAssets();
+app.UseStaticFiles();
 
 // urunler/telefon
 // urunler/elektronik

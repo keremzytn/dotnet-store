@@ -40,6 +40,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvS2F0ZWdvcmkvQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/kerem/Projects/udemyEgitim/dotnet-store/Views/Kategori/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvS2F0ZWdvcmkvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/kerem/Projects/udemyEgitim/dotnet-store/Views/Kategori/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvS2F0ZWdvcmkvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -58,6 +62,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/kerem/Projects/udemyEgitim/dotnet-store/Views/Shared/Partials/Admin/_AdminCards.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1BhcnRpYWxzL0FkbWluL19BZG1pbkNhcmRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kerem/Projects/udemyEgitim/dotnet-store/Views/Shared/Partials/Admin/_Message.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1BhcnRpYWxzL0FkbWluL19NZXNzYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/kerem/Projects/udemyEgitim/dotnet-store/Views/Shared/Partials/Admin/_Navbar.cshtml]
@@ -102,6 +110,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/kerem/Projects/udemyEgitim/dotnet-store/Views/Urun/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXJ1bi9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kerem/Projects/udemyEgitim/dotnet-store/Views/Urun/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXJ1bi9FZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/kerem/Projects/udemyEgitim/dotnet-store/Views/Urun/Index.cshtml]

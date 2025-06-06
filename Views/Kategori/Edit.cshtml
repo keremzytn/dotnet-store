@@ -1,4 +1,4 @@
-@model KategoriCreateModel
+@model KategoriEditModel
 @{
     Layout = "_AdminLayout";
 }
@@ -7,14 +7,15 @@
     <div class="col">
         <div class="card shadow">
             <div class="card-header py-1 d-flex justify-content-between align-items-center">
-                <h5 class="card-title">Kategori Ekle</h5>
+                <h5 class="card-title">Kategori Güncelle</h5>
                 <a href="kategori.html" class="btn btn-sm btn-primary">
                     <i class="fa-solid fa-list"></i>
                 </a>
             </div>
             <div class="card-body">
                 <div asp-validation-summary="All" class="text-danger"></div>
-                <form method="post" asp-controller="Kategori" asp-action="Create">
+                <form method="post">
+                    <input type="hidden" name="Id" value="@Model.Id">
                     <div class="row mb-3">
                         <label asp-for="KategoriAdi" class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-10">

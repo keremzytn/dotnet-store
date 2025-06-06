@@ -1,6 +1,8 @@
 using dotnet_store.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 
 namespace dotnet_store.Controllers;
 
@@ -66,26 +68,113 @@ public class UrunController : Controller
 
     public ActionResult Create()
     {
+        // ViewBag.Kategoriler = _context.Kategoriler.ToList();
+        ViewBag.Kategoriler = new SelectList(_context.Kategoriler.ToList(), "Id", "KategoriAdi");
         return View();
     }
 
     [HttpPost]
-    public ActionResult Create(UrunCreateModel model)
+    public async Task<ActionResult> Create(UrunCreateModel model)
     {
-        var entity = new Urun()
+        if (model.Resim == null || model.Resim.Length == 0)
         {
-            UrunAdi = model.UrunAdi,
-            Aciklama = model.Aciklama,
-            Fiyat = model.Fiyat,
-            Aktif = model.Aktif,
-            Anasayfa = model.Anasayfa,
-            KategoriId = model.KategoriId,
-            Resim = "1.jpeg"    // upload
-        };
+            ModelState.AddModelError("Resim", "Resim seçilmedi.");
+        }
 
-        _context.Urunler.Add(entity);
-        _context.SaveChanges();
+        if (ModelState.IsValid)
+        {
+            var fileName = Path.GetRandomFileName() + ".jpg";
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", fileName);
 
-        return RedirectToAction("Index");
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await model.Resim!.CopyToAsync(stream);
+            }
+
+            var entity = new Urun()
+            {
+                UrunAdi = model.UrunAdi,
+                Aciklama = model.Aciklama,
+                Fiyat = model.Fiyat ?? 0,
+                Aktif = model.Aktif,
+                Anasayfa = model.Anasayfa,
+                KategoriId = (int)model.KategoriId!,
+                Resim = fileName,
+            };
+
+            _context.Urunler.Add(entity);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        ViewBag.Kategoriler = new SelectList(_context.Kategoriler.ToList(), "Id", "KategoriAdi");
+        return View(model);
+    }
+
+    public ActionResult Edit(int id)
+    {
+        ViewBag.Kategoriler = new SelectList(_context.Kategoriler.ToList(), "Id", "KategoriAdi");
+
+        var entity = _context.Urunler.Select(i => new UrunEditModel
+        {
+            Id = i.Id,
+            UrunAdi = i.UrunAdi,
+            Fiyat = i.Fiyat,
+            Aktif = i.Aktif,
+            Anasayfa = i.Anasayfa,
+            KategoriId = i.KategoriId,
+            ResimAdi = i.Resim
+        }).FirstOrDefault(i => i.Id == id);
+
+        return View(entity);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Edit(int id, UrunEditModel model)
+    {
+        if (id != model.Id)
+        {
+            return RedirectToAction("Index");
+        }
+
+        if (model.Resim == null || model.Resim.Length == 0)
+        {
+            ModelState.AddModelError("Resim", "Resim seçilmedi.");
+        }
+
+        if (ModelState.IsValid)
+        {
+
+            var entity = _context.Urunler.FirstOrDefault(i => i.Id == model.Id);
+
+            if (entity != null)
+            {
+                if (model.Resim != null)
+                {
+                    var fileName = Path.GetRandomFileName() + ".jpg";
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", fileName);
+
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await model.Resim!.CopyToAsync(stream);
+                    }
+                    entity.Resim = fileName;
+                }
+                entity.UrunAdi = model.UrunAdi;
+                entity.Fiyat = model.Fiyat ?? 0;
+                entity.Aktif = model.Aktif;
+                entity.Anasayfa = model.Anasayfa;
+                entity.KategoriId = (int)model.KategoriId!;
+
+                _context.SaveChanges(); // update sql
+
+                TempData["Mesaj"] = $"{entity.UrunAdi} kategorisi güncellendi.";
+
+                return RedirectToAction("Index");
+            }
+        }
+        ViewBag.Kategoriler = new SelectList(_context.Kategoriler.ToList(), "Id", "KategoriAdi");
+        return View(model);
     }
 }
