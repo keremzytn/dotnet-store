@@ -23,7 +23,7 @@
                                 <th>Aktif</th>
                                 <th>Anasayfa</th>
                                 <th>Kategori</th>
-                                <th style="width: 50px;"></th>
+                                <th style="width: 100px;"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -62,10 +62,13 @@
                                             class="btn btn-primary btn-sm">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
+                                        <a asp-controller="Urun" asp-action="Delete" asp-route-id="@urun.Id"
+                                            class="btn btn-danger btn-sm">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             }
-
                         </tbody>
                     </table>
                 </div>
