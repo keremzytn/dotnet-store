@@ -108,6 +108,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/kerem/Projects/udemyEgitim/dotnet-store/Views/Slider/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2xpZGVyL0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kerem/Projects/udemyEgitim/dotnet-store/Views/Slider/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2xpZGVyL0RlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kerem/Projects/udemyEgitim/dotnet-store/Views/Slider/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2xpZGVyL0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kerem/Projects/udemyEgitim/dotnet-store/Views/Slider/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2xpZGVyL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/kerem/Projects/udemyEgitim/dotnet-store/Views/Urun/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXJ1bi9DcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

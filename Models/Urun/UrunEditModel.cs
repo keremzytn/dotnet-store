@@ -1,7 +1,4 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace dotnet_store.Models;
-
 public class UrunEditModel : UrunModel
 {
     public int Id { get; set; }

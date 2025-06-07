@@ -46,7 +46,7 @@ public class KategoriController : Controller
 
             return RedirectToAction("Index");
         }
-        return View();
+        return View(model);
     }
 
     public ActionResult Edit(int id)
@@ -68,6 +68,7 @@ public class KategoriController : Controller
         {
             return RedirectToAction("Index");
         }
+
         if (ModelState.IsValid)
         {
             var entity = _context.Kategoriler.FirstOrDefault(i => i.Id == model.Id);
@@ -84,6 +85,7 @@ public class KategoriController : Controller
                 return RedirectToAction("Index");
             }
         }
+
         return View(model);
     }
 
@@ -95,12 +97,14 @@ public class KategoriController : Controller
         }
 
         var entity = _context.Kategoriler.FirstOrDefault(i => i.Id == id);
+
         if (entity != null)
         {
             return View(entity);
         }
         return RedirectToAction("Index");
     }
+
     [HttpPost]
     public ActionResult DeleteConfirm(int? id)
     {
@@ -110,12 +114,16 @@ public class KategoriController : Controller
         }
 
         var entity = _context.Kategoriler.FirstOrDefault(i => i.Id == id);
+
         if (entity != null)
         {
             _context.Kategoriler.Remove(entity);
             _context.SaveChanges();
+
             TempData["Mesaj"] = $"{entity.KategoriAdi} kategorisi silindi.";
         }
         return RedirectToAction("Index");
     }
+
+
 }

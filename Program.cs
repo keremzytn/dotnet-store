@@ -27,11 +27,8 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+// app.MapStaticAssets();
 app.UseStaticFiles();
-
-// urunler/telefon
-// urunler/elektronik
-// urunler/beyaz-esya
 
 app.MapControllerRoute(
     name: "urunler_by_kategori",

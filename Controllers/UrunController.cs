@@ -1,8 +1,8 @@
+using System.Threading.Tasks;
 using dotnet_store.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
 
 namespace dotnet_store.Controllers;
 
@@ -14,9 +14,16 @@ public class UrunController : Controller
         _context = context;
     }
 
-    public ActionResult Index()
+    public ActionResult Index(int? kategori)
     {
-        var urunler = _context.Urunler.Select(i => new UrunGetModel
+        var query = _context.Urunler.AsQueryable();
+
+        if (kategori != null)
+        {
+            query = query.Where(i => i.KategoriId == kategori);
+        }
+
+        var urunler = query.Select(i => new UrunGetModel
         {
             Id = i.Id,
             UrunAdi = i.UrunAdi,
@@ -26,6 +33,8 @@ public class UrunController : Controller
             KategoriAdi = i.Kategori.KategoriAdi,
             Resim = i.Resim
         }).ToList();
+
+        ViewBag.Kategoriler = new SelectList(_context.Kategoriler.ToList(), "Id", "KategoriAdi", kategori);
 
         return View(urunler);
     }
@@ -68,7 +77,6 @@ public class UrunController : Controller
 
     public ActionResult Create()
     {
-        // ViewBag.Kategoriler = _context.Kategoriler.ToList();
         ViewBag.Kategoriler = new SelectList(_context.Kategoriler.ToList(), "Id", "KategoriAdi");
         return View();
     }
@@ -78,7 +86,7 @@ public class UrunController : Controller
     {
         if (model.Resim == null || model.Resim.Length == 0)
         {
-            ModelState.AddModelError("Resim", "Resim seçilmedi.");
+            ModelState.AddModelError("Resim", "Resim seçmelisiniz");
         }
 
         if (ModelState.IsValid)
@@ -99,7 +107,7 @@ public class UrunController : Controller
                 Aktif = model.Aktif,
                 Anasayfa = model.Anasayfa,
                 KategoriId = (int)model.KategoriId!,
-                Resim = fileName,
+                Resim = fileName
             };
 
             _context.Urunler.Add(entity);
@@ -114,19 +122,19 @@ public class UrunController : Controller
 
     public ActionResult Edit(int id)
     {
-        ViewBag.Kategoriler = new SelectList(_context.Kategoriler.ToList(), "Id", "KategoriAdi");
-
         var entity = _context.Urunler.Select(i => new UrunEditModel
         {
             Id = i.Id,
             UrunAdi = i.UrunAdi,
-            Fiyat = i.Fiyat,
+            Aciklama = i.Aciklama,
             Aktif = i.Aktif,
             Anasayfa = i.Anasayfa,
+            Fiyat = i.Fiyat,
             KategoriId = i.KategoriId,
             ResimAdi = i.Resim
         }).FirstOrDefault(i => i.Id == id);
 
+        ViewBag.Kategoriler = new SelectList(_context.Kategoriler.ToList(), "Id", "KategoriAdi");
         return View(entity);
     }
 
@@ -138,14 +146,8 @@ public class UrunController : Controller
             return RedirectToAction("Index");
         }
 
-        if (model.Resim == null || model.Resim.Length == 0)
-        {
-            ModelState.AddModelError("Resim", "Resim seçilmedi.");
-        }
-
         if (ModelState.IsValid)
         {
-
             var entity = _context.Urunler.FirstOrDefault(i => i.Id == model.Id);
 
             if (entity != null)
@@ -159,24 +161,30 @@ public class UrunController : Controller
                     {
                         await model.Resim!.CopyToAsync(stream);
                     }
+
                     entity.Resim = fileName;
                 }
+
                 entity.UrunAdi = model.UrunAdi;
+                entity.Aciklama = model.Aciklama;
                 entity.Fiyat = model.Fiyat ?? 0;
                 entity.Aktif = model.Aktif;
                 entity.Anasayfa = model.Anasayfa;
                 entity.KategoriId = (int)model.KategoriId!;
 
-                _context.SaveChanges(); // update sql
+                _context.SaveChanges();
 
-                TempData["Mesaj"] = $"{entity.UrunAdi} kategorisi güncellendi.";
+                TempData["Mesaj"] = $"{entity.UrunAdi} ürünü güncellendi.";
 
                 return RedirectToAction("Index");
             }
+
         }
+
         ViewBag.Kategoriler = new SelectList(_context.Kategoriler.ToList(), "Id", "KategoriAdi");
         return View(model);
     }
+
     public ActionResult Delete(int? id)
     {
         if (id == null)
@@ -185,12 +193,14 @@ public class UrunController : Controller
         }
 
         var entity = _context.Urunler.FirstOrDefault(i => i.Id == id);
+
         if (entity != null)
         {
             return View(entity);
         }
         return RedirectToAction("Index");
     }
+
     [HttpPost]
     public ActionResult DeleteConfirm(int? id)
     {
@@ -200,12 +210,16 @@ public class UrunController : Controller
         }
 
         var entity = _context.Urunler.FirstOrDefault(i => i.Id == id);
+
         if (entity != null)
         {
             _context.Urunler.Remove(entity);
             _context.SaveChanges();
-            TempData["Mesaj"] = $"{entity.UrunAdi} ürünü silindi.";
+
+            TempData["Mesaj"] = $"{entity.UrunAdi} isimli ürün silindi.";
         }
         return RedirectToAction("Index");
     }
+
+
 }
